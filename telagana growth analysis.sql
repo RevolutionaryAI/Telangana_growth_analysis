@@ -45,3 +45,10 @@ CASE
     ELSE "Low Revenue"
 END AS Income_Segments
 from cte;
+
+#5. How does the distribution of vehicles vary by vehicle class (MotorCycle, MotorCar, AutoRickshaw, Agriculture) across different districts? Are there any districts with a predominant preference for a specific vehicle class? Consider FY 2022 for analysis. 
+select a.district,SUM(b.vehicleClass_MotorCycle),SUM(b.vehicleClass_MotorCar),SUM(b.vehicleClass_AutoRickshaw),SUM(b.vehicleClass_Agriculture),SUM(b.vehicleClass_others) from dim_districts a
+join fact_transport b on a.dist_code=b.dist_code
+join dim_date c on c.month=b.month
+where c.fiscal_year=2022
+group by a.district;
